@@ -1,0 +1,76 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+	
+	<form action="" method="post">
+		{% csrf_token %}
+		<fieldset>
+	  		<legend>Novo Funcionario</legend>
+			{{ form.as_p }}
+	  
+	  		<button type="submit" class="btn btn-primary">
+	  				<span class="glyphicon glyphicon-thumbs-up"></span>
+	  				Cadastrar
+			</button>
+		</fieldset>  
+	</form> 			
+</div> <!-- fim .container 1 --> 
+
+<div class="container">
+ 	<br /> <br /> 
+</div> <!-- fim .container 2 -->
+	
+	
+<div class="container">
+  <div class="panel panel-default">
+  		<div class="panel-heading">
+    		<h2 class="panel-title">Lista de Funcionários</h2>
+ 	 	</div><!-- fim .panel-heading -->
+		
+		<div class="panel-body">  
+  			<table class="table table-hover">
+  				<tr>
+  						<th>Código</th>
+  						<th>Nome</th>
+  						<th>CPF</th>
+  						<th>Data Admissão</th>
+  						<th>Cargo</th>
+  						<th>Opções</th>
+  				</tr>
+				{% for funcionario in funcionarios %}
+  				<tr>
+    					<td class="col-md-1">{{ funcionario.id }}</td>
+    					<td class="col-md-3">{{ funcionario.nome }}</td>
+    					<td class="col-md-1">{{ funcionario.cpf}}</td>
+    					<td class="col-md-2">{{ funcionario.data_admissao }}</td>
+    					<td class="col-md-1">{{ funcionario.cargo }}</td>
+
+    					<td class="col-md-2">
+							<a class="btn btn-warning" href="{% url 'url_atualizafuncionario' funcionario.id%}" role="button">Editar</a>
+    						<a class="btn btn-danger" href="{% url 'url_removerfuncionario' funcionario.id%}" role="button">Excluir</a>
+    					</td>
+    			</tr>
+				{% endfor %}
+    			
+    			</table>
+    			
+ 		</div><!-- fim .panel-body -->
+	</div><!-- fim .panel -->
+</div><!-- fim .container 3 -->
+
+
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.inputmask.bundle.js' %}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#id_cpf').mask('000.000.000-00');
+  });
+
+</script>
+
+{% endblock %}

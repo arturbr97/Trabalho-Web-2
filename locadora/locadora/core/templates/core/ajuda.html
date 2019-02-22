@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="{% static 'css/ajuda.css' %}" >
+<body>
+<h1> Como usar a aplicação?</h1>
+<div>
+<p> Após Cadastrar um usuario para acessar a aplicação tem se acesso ao página inicial, nesta página tem-se acesso a barra de opções que o leva para a opção desejada de cadastrado
+de acordo com o respectivo nome. Esta aplicação tem como objetivo a gerencia básica para uma locadora de veiculos que precisa
+registrar os seus dados sobrel locações de veiculos funcionarios etc.
+Possui as seguintes funcionalidades para cadastro,
+<br>
+1. Menu de Login para que apenas usuarios cadastrados tenham acesso
+<br>
+2. Opções para cadastros diversas
+<br>
+2.1 Cadastro de Veiculos Disponiveis para Alugar
+<br>
+2.2 Cadastro de Locações Realizadas
+<br>
+2.3 Cadastro de Empregados da locadora
+<br>
+2.4 Cadastro de Respectivas funções para Empregados para fins de pagamento.
+<br>
+2.5 Cadastro de Clientes
+<br>
+3. Página de ajuda
+<a href="{% url 'url_index' %}">Voltar</a>
+</p>
+</div>
+</body>
+</html>

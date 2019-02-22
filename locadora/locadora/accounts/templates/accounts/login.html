@@ -1,0 +1,12 @@
+{% load static %}
+  <h1>Login</h1>
+  <link rel="stylesheet" href="{% static 'css/login1.css' %}" >
+  <form class="site-form"action="/accounts/login/"method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Login">
+
+    </form>
+    <div>
+    <a href="http://127.0.0.1:8000/accounts/log/">Voltar </a>
+    </div>

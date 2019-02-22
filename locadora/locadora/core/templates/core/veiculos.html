@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+
+  <form action="{% url 'url_veiculo' %}" method="post">
+      {% csrf_token %}
+    <fieldset>
+        <legend>Novo Veículo</legend>
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-thumbs-up"></span>
+            Cadastrar
+      </button>
+    </fieldset>
+  </form>
+</div> <!-- fim .container 1 -->
+
+<div class="container">
+  <br /> <br />
+</div> <!-- fim .container 2 -->
+
+
+<div class="container">
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Lista de Veículos</h2>
+    </div><!-- fim .panel-heading -->
+
+    <div class="panel-body">
+        <table class="table table-hover">
+          <tr>
+              <th>Código</th>
+              <th>Modelo</th>
+              <th>Cor</th>
+              <th>Ano</th>
+              <th>Placa</th>
+              <th>Tipo</th>
+              <th>Status</th>
+              <th>Opções</th>
+          </tr>
+            {% for veiculo in veiculos %}
+            <tr>
+              <td class="col-md-1">{{ veiculo.id }}</td>
+              <td class="col-md-1">{{ veiculo.modelo }}</td>
+              <td class="col-md-2">{{ veiculo.cor }}</td>
+              <td class="col-md-1">{{ veiculo.ano }}</td>
+              <td class="col-md-1">{{ veiculo.placa }}</td>
+              <td class="col-md-2">{{ veiculo.tipo }}</td>
+              <td class="col-md-2">{{ veiculo.status }}</td>
+
+              <td class="col-md-3">
+                  <a class="btn btn-warning" href="{% url 'url_atualizaveiculo' veiculo.pk %}" role="button">Editar</a>
+                  <a class="btn btn-danger" href="{% url 'url_removerveiculo' veiculo.pk %}" role="button">Excluir</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+
+    </div><!-- fim .panel-body -->
+  </div><!-- fim .panel -->
+</div><!-- fim .container 3 -->
+
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.mask.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.inputmask.bundle.js' %}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#id_placa').mask('aaa-9999');
+  });
+</script>
+
+{% endblock %}

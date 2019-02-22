@@ -1,0 +1,15 @@
+{% load static %}
+{% block content %}
+  <h1>Faça o Cadastro</h1>
+
+  <link rel="stylesheet" href="{% static 'css/signup1.css' %}" >
+
+  <form class="site-form"action="/accounts/signup/"method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="Cadastrar">
+    </form>
+
+    <a href="http://127.0.0.1:8000/accounts/log/">Voltar </a>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="container">
+
+
+	<form action="" method="post">
+
+      {% if messages %}
+              
+      {% for message in messages %}
+
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+        <div class="alert alert-warning fade in" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+          </button>
+
+          <ul>
+            <li>
+               {{ message }}
+            </li>
+          </ul>
+        
+        </div>
+        {% endif %}
+
+      {% endfor %}
+    
+  {% endif %}
+
+
+    {% csrf_token %}
+		
+    <fieldset>
+	  		<legend>Nova Locação</legend>
+			{{ form.as_p }}
+		<fieldset>
+	  		<button type="submit" class="btn btn-primary">
+	  				<span class="glyphicon glyphicon-thumbs-up"></span>
+	  				Cadastrar
+			</button>
+		</fieldset>
+	</form>
+</div> <!-- fim .container 1 -->
+
+<div class="container">
+ 	<br /> <br />
+</div> <!-- fim .container 2 -->
+
+
+<div class="container">
+  <div class="panel panel-default">
+  		<div class="panel-heading">
+    		<h2 class="panel-title">Lista de Locações</h2>
+ 	 	</div><!-- fim .panel-heading -->
+
+			<div class="panel-body">
+  				<table class="table table-hover">
+					<tr>
+  						<th>Código</th>
+  						<th>Data de Locação</th>
+  						<th>Data de Devolução</th>
+  						<th>Status</th>
+  						<th>Funcionário</th>
+              			<th>Cliente</th>
+              			<th>Veículo</th>
+  						<th>Opções</th>
+  					</tr>
+				{% for locacao in locacoes %}
+					<tr>
+    					<td class="col-md-1">{{ locacao.id }}</td>
+    					<td class="col-md-1">{{ locacao.data_locacao }}</td>
+              			<td class="col-md-1">{{ locacao.data_devolucao }}</td>
+    					<td class="col-md-1">{{ locacao.status }}</td>
+					  	<td class="col-md-1">{{ locacao.funcionario }}</td>
+					  	<td class="col-md-1">{{ locacao.cliente }}</td>
+						<td class="col-md-1">{{ locacao.veiculo }}</td>
+    					<td class="col-md-2">
+                            <a class="btn btn-warning" href="{% url 'url_atualizalocacao' locacao.id %}" role="button">Editar</a>
+    						<a class="btn btn-danger" href="{% url 'url_removerlocacao' locacao.id %}" role="button">Excluir</a>
+    					</td>
+    				</tr>
+				{% endfor %}
+    			</table>
+
+ 		</div><!-- fim .panel-body -->
+	</div><!-- fim .panel -->
+</div><!-- fim .container 3 -->
+
+
+{% endblock %}

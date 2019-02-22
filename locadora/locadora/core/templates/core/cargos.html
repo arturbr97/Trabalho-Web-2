@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+	
+	<form action="{% url 'url_cargo' %}" method="post">
+		{% csrf_token %}
+		<fieldset>
+	  		<legend>Novo Cargo</legend>
+			{{ form.as_p }}
+
+	  		<button type="submit" class="btn btn-primary">
+	  				<span class="glyphicon glyphicon-thumbs-up"></span>
+	  				Cadastrar
+			</button>
+		</fieldset>  
+	</form> 			
+</div> <!-- fim .container 1 --> 
+
+<div class="container">
+ 	<br /> <br /> 
+</div> <!-- fim .container 2 -->
+	
+	
+<div class="container">
+  <div class="panel panel-default">
+  		<div class="panel-heading">
+    		<h2 class="panel-title">Lista de Cargos</h2>
+ 	 	</div><!-- fim .panel-heading -->
+		
+		<div class="panel-body">  
+  			<table class="table table-hover">
+  				<tr>
+  						<th>Código</th>
+  						<th>Nome</th>
+  						<th>Descrição</th>
+  						<th>Salário Base</th>
+  						<th>Opções</th>
+  				</tr>
+					{% for cargo in cargos	%}
+    				<tr>
+    					<td class="col-md-1">{{ cargo.id }}</td>
+    					<td class="col-md-1">{{ cargo.nome }}</td>
+    					<td class="col-md-3">{{ cargo.descricao }}</td>
+    					<td class="col-md-1">{{ cargo.salario }}</td>
+
+    					<td class="col-md-2">
+							<a class="btn btn-warning" href="{% url 'url_atualizacargo' cargo.id %}" role="button">Editar</a>
+    						<a class="btn btn-danger" href="{% url 'url_removercargo' cargo.id %}" role="button">Excluir</a>
+    					</td>
+    				</tr>
+					{% endfor %}
+    			
+    			</table>
+    			
+ 		</div><!-- fim .panel-body -->
+	</div><!-- fim .panel -->
+</div><!-- fim .container 3 -->
+{% endblock %}
